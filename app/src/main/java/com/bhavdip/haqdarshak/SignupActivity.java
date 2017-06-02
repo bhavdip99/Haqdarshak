@@ -155,6 +155,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
 
                 imageViewProfilePic.setImageDrawable(getResources().getDrawable(R.drawable.img_profile_pic));
 
+                picUri = null;
                 if (dialog != null)
                     dialog.dismiss();
             }
@@ -244,7 +245,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CAMERA) {
                 // get the Uri for the captured image
-                performCrop();
+
                 if (data != null) {
                     if (data.getData() != null) {
                         picUri = data.getData();
@@ -252,6 +253,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                         picUri = getImageUri(this, bitmap);
                     }
+                    performCrop();
+
                 } else {
                     Snackbar.make(findViewById(android.R.id.content), "Returned data is null", Snackbar.LENGTH_LONG).show();
                 }
