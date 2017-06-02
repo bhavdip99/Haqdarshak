@@ -1,9 +1,12 @@
 package com.bhavdip.haqdarshak;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -22,7 +25,6 @@ public class LoginActivity_new extends AppCompatActivity {
     private static final int REQUEST_SIGNUP = 99;
     private static final String TAG = "LoginActivity";
 
-
     private EditText mobileNo;
     private EditText passwordText;
     private EditText firstName;
@@ -30,6 +32,7 @@ public class LoginActivity_new extends AppCompatActivity {
     private TextView wantRegister;
     private TextView passwordErr;
     private AppCompatButton loginButton;
+    private int counter =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +89,6 @@ public class LoginActivity_new extends AppCompatActivity {
         // TODO: Implement your own authentication logic here.
 
         // fetch the Password form database for respective user name
-
         UsersModel usersModel = new UsersModel(LoginActivity_new.this);
         String storedPassword = usersModel.getSinlgeEntry(mobile);
 
@@ -95,17 +97,30 @@ public class LoginActivity_new extends AppCompatActivity {
             onLoginSuccess();
             progressDialog.dismiss();
         } else {
-            onLoginFailed();
+
             progressDialog.dismiss();
+
+            if (counter == 3) {
+                loginButton.setEnabled(false);
+
+
+                Snackbar.make(findViewById(android.R.id.content), "Login failed again!, Login Disabled for 5 mins", Snackbar.LENGTH_LONG)
+                        .show();
+
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loginButton.setEnabled(true);
+                        counter = 0;
+                    }
+                }, 10000);
+
+            } else {
+
+                onLoginFailed();
+            }
         }
-
-//        new android.os.Handler().postDelayed(
-//                new Runnable() {
-//                    public void run() {
-        // On complete call either onLoginSuccess or onLoginFailed
-
-//                    }
-//                }, 500);
     }
 
     public void onLoginSuccess() {
@@ -118,15 +133,11 @@ public class LoginActivity_new extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity_new.this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        //                finish();
     }
 
     private void onLoginFailed() {
 
-        Snackbar.make(findViewById(android.R.id.content), "Login failed!, Please check entered details", Snackbar.LENGTH_LONG)
-                .show();
-
-//        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Snackbar.make(findViewById(android.R.id.content), "Login failed!, Please check entered details", Snackbar.LENGTH_LONG).show();
         loginButton.setEnabled(true);
     }
 

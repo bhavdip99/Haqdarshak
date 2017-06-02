@@ -216,6 +216,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         dialog.show();
 
     }
+
     public Uri getImageUri(Context inContext, Bitmap inImage) {
 //        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 //        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
@@ -297,9 +298,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         }
         // respond to users whose devices do not support the crop action
         catch (ActivityNotFoundException anfe) {
-            Toast toast = Toast
-                    .makeText(this, "This device doesn't support the crop action!", Toast.LENGTH_SHORT);
-            toast.show();
+            Snackbar.make(findViewById(android.R.id.content), "This device doesn't support the crop action!", Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -315,8 +314,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         } catch (ActivityNotFoundException anfe) {
             //display an error message
             String errorMessage = "Whoops - your device doesn't support capturing images!";
-            Toast toast = Toast.makeText(SignupActivity.this, errorMessage, Toast.LENGTH_SHORT);
-            toast.show();
+
+            Snackbar.make(findViewById(android.R.id.content), errorMessage, Snackbar.LENGTH_LONG).show();
         }
     }
 

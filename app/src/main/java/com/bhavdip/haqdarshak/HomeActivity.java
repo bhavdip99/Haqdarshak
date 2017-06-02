@@ -2,6 +2,7 @@ package com.bhavdip.haqdarshak;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +37,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (API_KEY.isEmpty()) {
-            Toast.makeText(getApplicationContext(), "Please obtain your API KEY first from newsapi.org", Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(android.R.id.content), "Please obtain your API KEY first from newsapi.org", Snackbar.LENGTH_LONG).show();
             return;
         }
 
