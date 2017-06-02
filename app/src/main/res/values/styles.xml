@@ -14,4 +14,14 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_up</item>
+    </style>
+    <style name="DialogSlideAnim" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@drawable/dialog_top_holo_light</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+    </style>
+
 </resources>
