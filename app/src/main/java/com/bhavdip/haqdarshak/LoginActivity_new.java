@@ -60,6 +60,11 @@ public class LoginActivity_new extends AppCompatActivity {
         });
     }
 
+    public void forceCrash(View view) {
+        throw new RuntimeException("This is a crash");
+    }
+
+
     private void login() {
         Log.d(TAG, "Login");
 

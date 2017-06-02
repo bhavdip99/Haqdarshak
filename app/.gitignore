@@ -9,3 +9,4 @@ Dependency/*
 /app/.idea/*
 /app/.svn/*
 /app/local.properties
+.idea/misc.xml

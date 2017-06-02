@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by bhavdip on 30/5/17.
@@ -18,6 +20,7 @@ public class AppApplication extends Application {
     public void onCreate() {
 
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         mContext = getApplicationContext();
 
         AsyncTask.execute(new Runnable() {

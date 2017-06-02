@@ -35,6 +35,9 @@
         <activity
             android:name=".WebViewActivity"
             android:label="@string/app_name"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="fff06c610e805ba64f69dba0b1c47f96114a6d83" />
     </application>
 
 </manifest>
